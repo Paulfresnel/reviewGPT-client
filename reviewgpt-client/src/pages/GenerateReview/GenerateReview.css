@@ -1,0 +1,11 @@
+.italic{
+    font-style: italic;
+}
+
+.error{
+    color: red;
+}
+
+.border{
+    border: 1px black solid;
+}
