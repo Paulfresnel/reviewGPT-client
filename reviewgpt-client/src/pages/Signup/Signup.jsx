@@ -19,10 +19,10 @@ function SignupPage() {
   const handleuserName = (event) => setUsername(event.target.value);
   const handleSignupSubmit = (event) => {
     event.preventDefault();
-    const newUser = {email, username, password};
+    const newUser = {email, name: username, password};
 
     axios.post(`${API_ROUTE}/auth/signup`, newUser)
-      .then(() => navigate('/log-in'))
+      .then(() => navigate('/login'))
       .catch(err => setErrorMessage(err.response.data.message));
   };
  

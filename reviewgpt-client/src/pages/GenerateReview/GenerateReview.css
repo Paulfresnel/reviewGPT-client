@@ -9,3 +9,12 @@
 .border{
     border: 1px black solid;
 }
+
+.flex{
+    display: flex;
+    justify-content: center;
+}
+
+.bold{
+    font-weight: bold;
+}

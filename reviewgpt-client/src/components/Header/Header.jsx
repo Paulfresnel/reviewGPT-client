@@ -39,7 +39,7 @@ function Header(){
 
                 {!isLoggedIn && <li className="nav-item ">
                 
-                  <p className="nav-link"><Link to={"/sign-up"}>Sign Up</Link> /  <Link to={"/log-in"}>Log In </Link></p>
+                  <p className="nav-link"><Link to={"/signup"}>Sign Up</Link> /  <Link to={"/login"}>Log In </Link></p>
                   <p className="nav-link"> </p>
                   
                 </li>}

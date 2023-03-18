@@ -6,7 +6,8 @@ import LoginPage from './pages/Login/Login';
 import SignupPage from './pages/Signup/Signup';
 import Header from './components/Header/Header';
 import GenerateReview from './pages/GenerateReview/GenerateReview';
-
+import IsAnon from './components/middlewares/IsAnon';
+import IsPrivate from './components/middlewares/IsPrivate';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <Route path={"/"} element={<HomePage/>}/>
       <Route path={'/login'} element={<LoginPage/>}/>
       <Route path={'/signup'} element={<SignupPage/>}/>
-      <Route path={'/generate-review'} element={<GenerateReview/>}/>
+      <Route path={'/generate-review'} element={<IsPrivate><GenerateReview/></IsPrivate>}/>
 
 
       </Routes>
