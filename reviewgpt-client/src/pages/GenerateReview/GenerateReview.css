@@ -18,3 +18,7 @@
 .bold{
     font-weight: bold;
 }
+
+.bordered{
+    border-top: 1px black solid;
+}

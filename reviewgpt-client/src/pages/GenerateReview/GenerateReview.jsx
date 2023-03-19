@@ -17,24 +17,31 @@ function GenerateReview(){
     const [isLoading, setIsLoading] = useState(false)
     const [promptTokens, setPromptTokens] = useState(0)
     const [totalTokens, setTotalTokens] = useState(0)
+    const [language, setLanguage] = useState('')
 
     const updatePrompt = (e)=>{
         setPrompt(e.target.value)
-        setPromptTokens((placeName.length + prompt.length) * 0.75)
+        setPromptTokens((placeName.length + prompt.length +language.length) * 0.75)
         console.log("tokens in prompt", promptTokens)
         console.log("prompt length:",prompt.length)
     }
 
     const updatePlaceName = (e)=>{
         setPlaceName(e.target.value)
-        setPromptTokens((placeName.length + prompt.length) * 0.75)
+        setPromptTokens((placeName.length + prompt.length+language.length) * 0.75)
+        console.log("tokens in prompt", promptTokens)
+        console.log("prompt length:",prompt.length)
+    }
+    const languageResponse = (e)=>{
+        setLanguage(e.target.value)
+        setPromptTokens((placeName.length + prompt.length + language.length) * 0.75)
         console.log("tokens in prompt", promptTokens)
         console.log("prompt length:",prompt.length)
     }
 
     const generateReview = (e) =>{
         
-        if (prompt.length > 75){
+        if (prompt.length > 80){
             let errorMessage = `Your prompt is currently too long with ${prompt.length} characters. Shorten it!` 
             setErrorMessage(errorMessage)
             setTimeout(()=>{
@@ -44,6 +51,13 @@ function GenerateReview(){
         }
         else if (category === ''){
             let errorMessage = `Please select a category before generating your Review!` 
+            setErrorMessage(errorMessage)
+            setTimeout(()=>{
+                setErrorMessage('')
+            }, 2000)
+        }
+        else if (language === ''){
+            let errorMessage = `Please select a language before generating your Review!` 
             setErrorMessage(errorMessage)
             setTimeout(()=>{
                 setErrorMessage('')
@@ -59,7 +73,7 @@ function GenerateReview(){
         }
         else {
             setIsLoading(true)
-            axios.post(`${serverUrl}/api/review`, {prompt:'Name:' + ' ' +placeName + '.' + ' ' + prompt, category: category})
+            axios.post(`${serverUrl}/api/review`, {prompt:'Name:' + ' ' +placeName + '.' + ' ' + prompt +'.'+` Write in ${language}`, category: category})
                 .then(response=>{
                     console.log(response)
                     let gptApiResponse = response.data.choices[0].text
@@ -104,19 +118,24 @@ function GenerateReview(){
             {prompt.length < 20 ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
 
            </div>
+           <div>
+            <label>Language:<input onChange={(e)=>languageResponse(e)}></input></label>
+            {language.length < 3 ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
+           </div>
            {category==='Restaurant' && <p className="italic">Ex: Great Food, quiet place, a bit expensive, lovely service</p>}
            {category==='Appartment' && <p className="italic">Ex: Quiet neighborhood, fair rent, crowded space, lovely owner</p>}
            {category==='Retail Store' && <p className="italic">Ex: Rude manager, crowded, expensive, not enough products</p>}
            {category==='Corporate Office' && <p className="italic">Ex: Great service, easily accesible, parking available</p>}
            {category==='Company' && <p className="italic">Ex: Great service, parking available, main office</p>}
            {category==='Video' && <p className="italic">Ex: Accurate guide, easily understandable, good explanation, only available in english</p>}
-           {promptTokens !== 0 && <p>Your prompt will use <span className="bold">{promptTokens}</span> tokens in your quota usage</p>}
+           {promptTokens !== 0 && <p>Your prompt will approximatively use <span className="bold">{promptTokens}</span> tokens in your quota usage</p>}
            <button className="btn btn-outline-primary" onClick={(e)=>generateReview(e)} >Generate Review!</button>
 
            {errorMessage && <p className="error">{errorMessage}</p>}
            
           {!isLoading  && <div>{gptResponse && <div className="border">
                 <p>{gptResponse}</p>
+                <br className="bordered"/>
                 {totalTokens !== 0 && <p>This Generation costed you a total of <span className="bold"> {totalTokens}</span> from your total Tokens quota limit</p>}
            </div>}
            </div>}
