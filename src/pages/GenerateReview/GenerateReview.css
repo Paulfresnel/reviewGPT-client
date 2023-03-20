@@ -22,3 +22,7 @@
 .bordered{
     border-top: 1px black solid;
 }
+
+.alert{
+    color: red;
+}

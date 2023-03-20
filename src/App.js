@@ -8,6 +8,7 @@ import Header from './components/Header/Header';
 import GenerateReview from './pages/GenerateReview/GenerateReview';
 import IsAnon from './components/middlewares/IsAnon';
 import IsPrivate from './components/middlewares/IsPrivate';
+import Profile from './pages/Profile/Profile';
 
 function App() {
   return (
@@ -16,10 +17,9 @@ function App() {
       <Routes>
       <Route path={"/"} element={<HomePage/>}/>
       <Route path={'/login'} element={<LoginPage/>}/>
-      <Route path={'/signup'} element={<SignupPage/>}/>
+      <Route path={'/signup'} element={<IsAnon><SignupPage/></IsAnon>}/>
+      <Route path={'/profile'} element={<IsPrivate><Profile/></IsPrivate>}/>
       <Route path={'/generate-review'} element={<IsPrivate><GenerateReview/></IsPrivate>}/>
-
-
       </Routes>
     </div>
   );

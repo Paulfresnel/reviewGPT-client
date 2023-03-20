@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import './GenerateReview.css'
 import axios from "axios"
 import { MutatingDots} from 'react-loader-spinner'
@@ -8,7 +8,7 @@ import { useContext } from "react"
 const serverUrl = process.env.REACT_APP_SERVER_URL
 
 function GenerateReview(){
-    const { user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [category, setCategory] = useState('')
     const [placeName, setPlaceName] = useState('')
     const [prompt, setPrompt] = useState('')
@@ -18,6 +18,7 @@ function GenerateReview(){
     const [promptTokens, setPromptTokens] = useState(0)
     const [totalTokens, setTotalTokens] = useState(0)
     const [language, setLanguage] = useState('')
+    const [userCredits, setUserCredits] = useState(0)
 
     const updatePrompt = (e)=>{
         setPrompt(e.target.value)
@@ -63,6 +64,13 @@ function GenerateReview(){
                 setErrorMessage('')
             }, 2000)
         }
+        else if (placeName === ''){
+            let errorMessage = `Please indicate the name or title for your review.` 
+            setErrorMessage(errorMessage)
+            setTimeout(()=>{
+                setErrorMessage('')
+            }, 2000)
+        }
         else if (prompt.length < 20){
             let errorMessage = `Your prompt is too short! Your prompt must have at least 20 characters for an optimized generation` 
             setErrorMessage(errorMessage)
@@ -71,21 +79,45 @@ function GenerateReview(){
             }, 2000)
             
         }
+        else if (userCredits < 0){
+            let errorMessage = `You do not have enough credits to generate a new review! Please buy more or wait until your free monthly refill` 
+            setErrorMessage(errorMessage)
+            setTimeout(()=>{
+                setErrorMessage('')
+            }, 3500)
+            
+        }
         else {
             setIsLoading(true)
-            axios.post(`${serverUrl}/api/review`, {prompt:'Name:' + ' ' +placeName + '.' + ' ' + prompt +'.'+` Write in ${language}`, category: category})
+            axios.post(`${serverUrl}/api/review`, {prompt:'Name:' + ' ' +placeName + '.' + ' ' + prompt +'.'+` Write in ${language}`, category: category, userId: user._id})
                 .then(response=>{
                     console.log(response)
-                    let gptApiResponse = response.data.choices[0].text
-                    let totalTokensUsed = response.data.usage.total_tokens
+                    let gptApiResponse = response.data.promptResponse.choices[0].text
+                    let totalTokensUsed = response.data.promptResponse.usage.total_tokens
+                    let newUserCredits = response.data.userUpdated.credits
                     setTotalTokens(totalTokensUsed)
                     setGptResponse(gptApiResponse)
+                    setTimeout(()=>{
+                        setUserCredits(newUserCredits)
+                    },500)
                     setTimeout(()=>{
                         setIsLoading(false)
                     }, 1000)
                 })
         }
     }
+
+    useEffect(()=>{
+        console.log(user)
+        axios.get(`${serverUrl}/api/user/${user._id}`)
+            .then(apiResponse=>{
+                console.log(apiResponse)
+                let userCurrentCredits = apiResponse.data.credits
+                setUserCredits(userCurrentCredits)
+            })
+    }, [])
+
+
 
     return(
         <div>
@@ -118,27 +150,33 @@ function GenerateReview(){
             {prompt.length < 20 ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
 
            </div>
-           <div>
-            <label>Language:<input onChange={(e)=>languageResponse(e)}></input></label>
-            {language.length < 3 ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
-           </div>
+           
            {category==='Restaurant' && <p className="italic">Ex: Great Food, quiet place, a bit expensive, lovely service</p>}
            {category==='Appartment' && <p className="italic">Ex: Quiet neighborhood, fair rent, crowded space, lovely owner</p>}
            {category==='Retail Store' && <p className="italic">Ex: Rude manager, crowded, expensive, not enough products</p>}
            {category==='Corporate Office' && <p className="italic">Ex: Great service, easily accesible, parking available</p>}
            {category==='Company' && <p className="italic">Ex: Great service, parking available, main office</p>}
            {category==='Video' && <p className="italic">Ex: Accurate guide, easily understandable, good explanation, only available in english</p>}
-           {promptTokens !== 0 && <p>Your prompt will approximatively use <span className="bold">{promptTokens}</span> tokens in your quota usage</p>}
+           {promptTokens !== 0 && <p>Your prompt will approximatively use <span className="bold">{promptTokens+24}</span> tokens in your quota usage</p>}
+           <div>
+            <label>Language:<input onChange={(e)=>languageResponse(e)}></input></label>
+            {language.length < 3 ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
+           </div>
            <button className="btn btn-outline-primary" onClick={(e)=>generateReview(e)} >Generate Review!</button>
-
            {errorMessage && <p className="error">{errorMessage}</p>}
            
           {!isLoading  && <div>{gptResponse && <div className="border">
                 <p>{gptResponse}</p>
                 <br className="bordered"/>
-                {totalTokens !== 0 && <p>This Generation costed you a total of <span className="bold"> {totalTokens}</span> from your total Tokens quota limit</p>}
+                {totalTokens !== 0 && <p>This Generation costed you a total of <span className="bold"> {totalTokens}</span> credits from your total Tokens quota limit</p>}
            </div>}
            </div>}
+                   {userCredits>0 ? <p>Credits Remaining: {userCredits}</p> : <div>
+                   <p className="alert">Credits Remaining: {userCredits}</p>
+                   <p className="btn btn-outline-danger">You will not be able to generate anymore reviews until you recharge your Credits</p>
+                   
+                   </div>}
+
            {isLoading  && <div className="flex">
             <MutatingDots 
                  height="100"
