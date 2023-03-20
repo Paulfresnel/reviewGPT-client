@@ -31,11 +31,11 @@ function Header(){
                   </Link>
                 </li>} 
                 
-                <li className="nav-item nav-link">
+                {isLoggedIn && <li className="nav-item nav-link">
                   <Link to={"/generate-review"}>
                     <p className="nav-link">Generate Review</p> 
                   </Link>
-                </li>
+                </li>}
 
                 {!isLoggedIn && <li className="nav-item ">
                 

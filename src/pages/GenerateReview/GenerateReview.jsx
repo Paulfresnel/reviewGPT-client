@@ -89,7 +89,7 @@ function GenerateReview(){
         }
         else {
             setIsLoading(true)
-            axios.post(`${serverUrl}/api/review`, {prompt:'Name:' + ' ' +placeName + '.' + ' ' + prompt +'.'+` Write in ${language}`, category: category, userId: user._id})
+            axios.post(`${serverUrl}/api/review`, {category: category, userId: user._id, placeName, language, promptNotes: prompt})
                 .then(response=>{
                     console.log(response)
                     let gptApiResponse = response.data.promptResponse.choices[0].text
