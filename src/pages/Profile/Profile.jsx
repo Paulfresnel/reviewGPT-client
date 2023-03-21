@@ -23,7 +23,7 @@ function Profile(){
                 <h1>Welcome {userProfile.user}</h1> {userProfile.userStatus === 'premium' && <span class="badge bg-warning new-badge">Premium</span>}
             </div>
             <p>Total Credits Left: {userProfile.credits}</p>
-            {userProfile.credits < 0 && <p className="btn btn-outline-danger"> You will need to recharge your credits before being able to use our generation tool again</p>}
+            {userProfile.credits < 0 && <p className="btn btn-outline-danger white-font"> You will need to recharge your credits before being able to use our generation tool again</p>}
             
             <br/>
             <h2>Reviews Generated</h2>

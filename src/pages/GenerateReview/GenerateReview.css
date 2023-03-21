@@ -13,6 +13,7 @@
 .flex{
     display: flex;
     justify-content: center;
+    margin: 15px 0px 15px 0px;
 }
 
 .bold{
@@ -24,5 +25,43 @@
 }
 
 .alert{
-    color: red;
+    color: seashell;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.spaced{
+    margin-right: 10px;
+    border-radius: 25px;
+    background-color: #3F0FB7;
+    border: 2px solid black;
+    height: 40px;
+}
+
+.white-font{
+    color: seashell;
+    border:2px red solid
+}
+
+
+.justify{
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-c{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+i{
+    margin-left: 15px;
+    font-size: 1.5rem;
+    color:seashell
+}
+
+.bi-bookmark-check-fill{
+    color: greenyellow;
 }

@@ -120,9 +120,10 @@ function GenerateReview(){
 
 
     return(
-        <div>
+        <div className="flex-c">
         <h1>Welcome back {user.name}</h1>
         <div className="flex">
+        <h4 className="btn btn-primary spaced">1</h4>
         <h3>Generate a Review for a <select onChange={(e)=>setCategory(e.target.value)}> 
             <option selected disabled>- - Choose Type - -</option>
             <option value='Restaurant'>Restaurant</option>
@@ -136,6 +137,7 @@ function GenerateReview(){
         </div> 
             <div>
             <div className="flex">
+            <h4 className="btn btn-primary spaced">2</h4>
             <label>Place Name:<input onChange={(e)=>updatePlaceName(e)}></input></label>
             {placeName === '' ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
             </div>
@@ -145,8 +147,9 @@ function GenerateReview(){
            {category==='Corporate Office' && <p className="italic">Ex: Delivery postal Service</p>}
            {category==='Company' && <p className="italic">Ex: Sleever Packaging Company</p>}
            {category==='Video' && <p className="italic">Ex: Learn Web3 Programming</p>}
-            <div className="flex">
-           <label> Write your Notes <textarea onChange={(e)=>updatePrompt(e)}></textarea></label>
+            <div className="flex justify">
+            <h4 className="btn btn-primary spaced fixed-h">3</h4>
+           <label className="flex justify"> Write your Notes <textarea onChange={(e)=>updatePrompt(e)}></textarea></label>
             {prompt.length < 20 ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
 
            </div>
@@ -159,6 +162,7 @@ function GenerateReview(){
            {category==='Video' && <p className="italic">Ex: Accurate guide, easily understandable, good explanation, only available in english</p>}
            {promptTokens !== 0 && <p>Your prompt will approximatively use <span className="bold">{promptTokens+24}</span> tokens in your quota usage</p>}
            <div>
+           <h4 className="btn btn-primary spaced">4</h4>
             <label>Language:<input onChange={(e)=>languageResponse(e)}></input></label>
             {language.length < 3 ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
            </div>
@@ -173,7 +177,7 @@ function GenerateReview(){
            </div>}
                    {userCredits>0 ? <p>Credits Remaining: {userCredits}</p> : <div>
                    <p className="alert">Credits Remaining: {userCredits}</p>
-                   <p className="btn btn-outline-danger">You will not be able to generate anymore reviews until you recharge your Credits</p>
+                   <p className="btn btn-outline-danger white-font">You will not be able to generate anymore reviews until you recharge your Credits</p>
                    
                    </div>}
 
