@@ -15,3 +15,22 @@
     color: coral;
     font-weight: bold;
 }
+
+.card{
+    color: #003556;
+    width: 35rem;
+}
+
+
+.gpt-response{
+    font-style: italic;
+    border: 1px #9A58FD solid;
+    border-radius: 5px 25px 5px 25px;
+    padding: 8px;
+}
+
+.flex-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
