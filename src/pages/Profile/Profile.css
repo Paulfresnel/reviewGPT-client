@@ -27,6 +27,7 @@
     border: 1px #9A58FD solid;
     border-radius: 5px 25px 5px 25px;
     padding: 8px;
+    box-shadow: 8px 8px 5px 1px #3b1b6b;
 }
 
 .flex-wrap{

@@ -7,3 +7,114 @@
     text-align: left;
     margin: 2px 0px 2px 0px;
 }
+
+.typewriter {
+    min-width: 300px;
+    padding: 2.5em 2em 2.5em 1.5em;
+    border-radius: 1em;
+    margin: 2em;
+    display: flex;
+    align-items: center;
+}
+
+.typewriter svg {
+    padding-right: 2em;
+}
+
+.typewriter p {
+    color: #000;
+    font-size: 1.5em;
+    font-weight: 500;
+    width: 0;
+    max-width: max-content;
+    overflow: hidden;
+    border-right: .05em solid #464545;
+    /* The typwriter cursor */
+    white-space: nowrap;
+    /* Keeps the content on a single line */
+    margin: 0;
+    /* Gives that scrolling effect as the typing happens */
+}
+
+.text {
+    text-align: center;
+    margin: 0 auto;
+    max-height:2rem;
+    overflow:hidden;
+}
+
+.wrapper {
+    animation: slide-text 20s steps(1, end) infinite;
+}
+
+.m-bottom{
+    margin-bottom: 0;
+}
+
+.wrapper p {
+    margin: 1rem 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: center;
+    color: coral;
+    animation:
+        typing-erase 5s steps(40, end) infinite,
+        blink-caret .5s step-end infinite;
+}
+
+/* The type and erase effect */
+@keyframes typing-erase {
+    0% {
+        width: 0
+    }
+
+    50%,
+    70% {
+        width: 100%
+    }
+
+    90%,
+    100% {
+        width: 0
+    }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: gray
+    }
+}
+
+@keyframes slide-text {
+
+    0%,
+    25% {
+        transform: translateY(-1rem)
+    }
+
+    25%,
+    50% {
+        transform: translateY(-3.5rem)
+    }
+
+    50%,
+    75% {
+        transform: translateY(-6rem)
+    }
+
+    75%,
+    100% {
+        transform: translateY(6rem)
+    }
+}
+
+.ta-center{
+    text-align: center;
+}
