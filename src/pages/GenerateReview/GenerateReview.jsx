@@ -127,11 +127,15 @@ function GenerateReview(){
         <h3>Generate a Review for a <select onChange={(e)=>setCategory(e.target.value)}> 
             <option selected disabled>- - Choose Type - -</option>
             <option value='Restaurant'>Restaurant</option>
+            <option value='Bar'>Bar</option>
+            <option value='Hotel'>Hotel</option>
             <option value='Appartment'>Appartment</option>
             <option value='Retail Store'>Retail Store</option>
             <option value='Corporate Office'>Corporate Office</option>
             <option value='Company'>Company</option>
             <option value='Video'>Video</option>
+            <option value='Event'>Event</option>
+
         </select></h3>
         {category === '' ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
         </div> 
@@ -142,8 +146,11 @@ function GenerateReview(){
             {placeName === '' ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
             </div>
             {category==='Restaurant' && <p className="italic">Ex: Georgia Restaurant</p>}
-           {category==='Appartment' && <p className="italic">Ex: Studio Appartment</p>}
-           {category==='Retail Store' && <p className="italic">Ex: Nike Store</p>}
+            {category==='Event' && <p className="italic">Ex: Music Festival/ Paint Exposition</p>}
+            {category==='Bar' && <p className="italic">Ex: Café Oz</p>}
+            {category==='Hotel' && <p className="italic">Ex: NH Hotels</p>}
+            {category==='Appartment' && <p className="italic">Ex: Studio Appartment</p>}
+            {category==='Retail Store' && <p className="italic">Ex: Nike Store</p>}
            {category==='Corporate Office' && <p className="italic">Ex: Delivery postal Service</p>}
            {category==='Company' && <p className="italic">Ex: Sleever Packaging Company</p>}
            {category==='Video' && <p className="italic">Ex: Learn Web3 Programming</p>}
@@ -155,6 +162,9 @@ function GenerateReview(){
            </div>
            
            {category==='Restaurant' && <p className="italic">Ex: Great Food, quiet place, a bit expensive, lovely service</p>}
+           {category==='Bar' && <p className="italic">Ex: Great Beer, lovely atmostphere, bit expensive, friendly staff</p>}
+           {category==='Event' && <p className="italic">Ex: Great sound system, security in place, too crowded, best techno music</p>}
+           {category==='Hotel' && <p className="italic">Ex: Great Food service, cheap, spacious rooms, friendly staff</p>}
            {category==='Appartment' && <p className="italic">Ex: Quiet neighborhood, fair rent, crowded space, lovely owner</p>}
            {category==='Retail Store' && <p className="italic">Ex: Rude manager, crowded, expensive, not enough products</p>}
            {category==='Corporate Office' && <p className="italic">Ex: Great service, easily accesible, parking available</p>}
