@@ -8,6 +8,17 @@
 
 .border{
     border: 1px black solid;
+    width: 350px;
+    border-radius: 5px 25px 5px 25px;
+    margin: 25px 0px 25px 0px;
+}
+
+.white-color{
+    color: white;
+}
+
+.green-color{
+    color:#adff2f
 }
 
 .flex{
@@ -15,6 +26,20 @@
     justify-content: center;
     align-items: center;
     margin: 25px 0px 25px 0px;
+}
+
+.margin-0-auto{
+    display: flex;
+    justify-content: center;
+}
+
+.copy-btn2{
+    margin-left: 250px;
+    font-size: 1.5rem;
+}
+
+#gpt-response{
+    margin: 0px 15px;
 }
 
 
@@ -66,5 +91,37 @@ i{
 }
 
 .bi-bookmark-check-fill{
-    color: greenyellow;
+    color: #adff2f;
+}
+
+.short{
+    width: 55px;
+}
+
+.no-margin-top{
+    margin-top: 0;
+    padding-bottom: 25px;
+}
+
+.no-padding-bottom{
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.generate-btn-valid {
+    color: #adff2f !important;
+    border: 1px solid #adff2f;
+}
+
+.generate-btn-invalid{
+    color: #fcfcfc !important;
+    border: 1px solid #fcfcfc;
+}
+
+.margin-bottom{
+    margin-bottom: 50px;
+}
+
+.btn-outline-danger{
+    margin: 10px 25px 10px 25px;
 }

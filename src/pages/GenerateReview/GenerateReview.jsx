@@ -4,6 +4,7 @@ import axios from "axios"
 import { MutatingDots} from 'react-loader-spinner'
 import { AuthContext } from "../../context/auth.context"
 import { useContext } from "react"
+import ClipboardJS from "clipboard"
 
 const serverUrl = process.env.REACT_APP_SERVER_URL
 
@@ -19,6 +20,15 @@ function GenerateReview(){
     const [totalTokens, setTotalTokens] = useState(0)
     const [language, setLanguage] = useState('')
     const [userCredits, setUserCredits] = useState(0)
+
+      const copied = (e)=>{
+        const element = e.target
+        element.className = "btn copy-btn2 bi bi-clipboard2-check-fill green-color"
+        setTimeout(()=>{
+            element.className = "btn copy-btn2 bi bi-clipboard2-check white-color"
+        },550)
+    }
+
 
     const updatePrompt = (e)=>{
         setPrompt(e.target.value)
@@ -42,7 +52,16 @@ function GenerateReview(){
 
     const generateReview = (e) =>{
         
-        if (prompt.length > 80){
+        if (userCredits < 0){
+            let errorMessage = `You do not have enough credits to generate a new review! Please buy more or wait until your free monthly refill` 
+            setErrorMessage(errorMessage)
+            setTimeout(()=>{
+                setErrorMessage('')
+            }, 3500)
+            
+        }
+        
+        else if (prompt.length > 80){
             let errorMessage = `Your prompt is currently too long with ${prompt.length} characters. Shorten it!` 
             setErrorMessage(errorMessage)
             setTimeout(()=>{
@@ -57,13 +76,7 @@ function GenerateReview(){
                 setErrorMessage('')
             }, 2000)
         }
-        else if (language === ''){
-            let errorMessage = `Please select a language before generating your Review!` 
-            setErrorMessage(errorMessage)
-            setTimeout(()=>{
-                setErrorMessage('')
-            }, 2000)
-        }
+        
         else if (placeName === ''){
             let errorMessage = `Please indicate the name or title for your review.` 
             setErrorMessage(errorMessage)
@@ -79,13 +92,13 @@ function GenerateReview(){
             }, 2000)
             
         }
-        else if (userCredits < 0){
-            let errorMessage = `You do not have enough credits to generate a new review! Please buy more or wait until your free monthly refill` 
+        
+        else if (language.length < 3){
+            let errorMessage = `Please select a language before generating your Review!` 
             setErrorMessage(errorMessage)
             setTimeout(()=>{
                 setErrorMessage('')
-            }, 3500)
-            
+            }, 2000)
         }
         else {
             setIsLoading(true)
@@ -108,6 +121,7 @@ function GenerateReview(){
     }
 
     useEffect(()=>{
+        const clipboard = new ClipboardJS('.btn');
         console.log(user)
         axios.get(`${serverUrl}/api/user/${user._id}`)
             .then(apiResponse=>{
@@ -120,7 +134,7 @@ function GenerateReview(){
 
 
     return(
-        <div className="flex-c">
+        <div className="flex-c margined">
         <h1>Welcome back {user.name}</h1>
         <div className="flex">
         <h4 className="btn btn-primary spaced">1</h4>
@@ -135,6 +149,10 @@ function GenerateReview(){
             <option value='Company'>Company</option>
             <option value='Video'>Video</option>
             <option value='Event'>Event</option>
+            <option value='Museum'>Museum</option>
+            <option value='Gym'>Gym</option>
+
+
 
         </select></h3>
         {category === '' ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
@@ -147,22 +165,26 @@ function GenerateReview(){
             </div>
             {category==='Restaurant' && <p className="italic">Ex: Georgia Restaurant</p>}
             {category==='Event' && <p className="italic">Ex: Music Festival/ Paint Exposition</p>}
+            {category==='Gym' && <p className="italic">Ex: Fit Gym Madrid</p>}
             {category==='Bar' && <p className="italic">Ex: Café Oz</p>}
             {category==='Hotel' && <p className="italic">Ex: NH Hotels</p>}
+            {category==='Museum' && <p className="italic">Ex: The Louvre</p>}
             {category==='Appartment' && <p className="italic">Ex: Studio Appartment</p>}
             {category==='Retail Store' && <p className="italic">Ex: Nike Store</p>}
            {category==='Corporate Office' && <p className="italic">Ex: Delivery postal Service</p>}
            {category==='Company' && <p className="italic">Ex: Sleever Packaging Company</p>}
            {category==='Video' && <p className="italic">Ex: Learn Web3 Programming</p>}
-            <div className="flex justify">
+            <div className="flex justify no-padding-bottom">
             <h4 className="btn btn-primary spaced fixed-h">3</h4>
            <label className="flex justify"> Write your Notes <textarea onChange={(e)=>updatePrompt(e)}></textarea></label>
             {prompt.length < 20 ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
 
            </div>
-           
+           <div className="no-margin-top">
            {category==='Restaurant' && <p className="italic">Ex: Great Food, quiet place, a bit expensive, lovely service</p>}
            {category==='Bar' && <p className="italic">Ex: Great Beer, lovely atmostphere, bit expensive, friendly staff</p>}
+           {category==='Museum' && <p className="italic">Ex: Great diversity of art, quiet and calm atmostphere, cheap entry</p>}
+           {category==='Gym' && <p className="italic">Ex: Cheap subscription plans, great quality material, spacious, friendly staff</p>}
            {category==='Event' && <p className="italic">Ex: Great sound system, security in place, too crowded, best techno music</p>}
            {category==='Hotel' && <p className="italic">Ex: Great Food service, cheap, spacious rooms, friendly staff</p>}
            {category==='Appartment' && <p className="italic">Ex: Quiet neighborhood, fair rent, crowded space, lovely owner</p>}
@@ -170,22 +192,27 @@ function GenerateReview(){
            {category==='Corporate Office' && <p className="italic">Ex: Great service, easily accesible, parking available</p>}
            {category==='Company' && <p className="italic">Ex: Great service, parking available, main office</p>}
            {category==='Video' && <p className="italic">Ex: Accurate guide, easily understandable, good explanation, only available in english</p>}
-           {promptTokens !== 0 && <p>Your prompt will approximatively use <span className="bold">{promptTokens+24}</span> tokens in your quota usage</p>}
+           {promptTokens !== 0 && <p>This request will approximately cost you a total of <span className="bold">{promptTokens+70}</span> credits in your quota usage</p>}
+
+           </div>
            <div>
            <h4 className="btn btn-primary spaced">4</h4>
-            <label>Language:<input onChange={(e)=>languageResponse(e)}></input></label>
+            <label>Language:<input className="short" onChange={(e)=>languageResponse(e)}></input></label>
             {language.length < 3 ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
            </div>
-           <button className="btn btn-outline-primary" onClick={(e)=>generateReview(e)} >Generate Review!</button>
+           <p className="italic">Ex: French</p>
+           {(category !== '' && placeName.length >= 3 && language.length >= 3 && prompt.length >= 20)? <button className="btn btn-outline-primary generate-btn-valid" onClick={(e)=>generateReview(e)} >Generate Review!</button> : <button className="btn btn-outline-primary generate-btn-invalid" onClick={(e)=>generateReview(e)} >Generate Review!</button>}
            {errorMessage && <p className="error">{errorMessage}</p>}
            
-          {!isLoading  && <div>{gptResponse && <div className="border">
-                <p>{gptResponse}</p>
+          {!isLoading  && <div className="margin-0-auto">{gptResponse && <div className="border">
+                 <i onClick={(e)=>copied(e)} data-clipboard-text={gptResponse} className="btn ta-right copy-btn2 bi bi-clipboard2-check white-color"></i>
+                <p id="gpt-response">{gptResponse}</p>
                 <br className="bordered"/>
+                <div className="div-block"/>
                 {totalTokens !== 0 && <p>This Generation costed you a total of <span className="bold"> {totalTokens}</span> credits from your total Tokens quota limit</p>}
            </div>}
            </div>}
-                   {userCredits>0 ? <p>Credits Remaining: {userCredits}</p> : <div>
+                   {userCredits>0 ? <p>Credits Remaining: {userCredits}</p> : <div className="margin-bottom">
                    <p className="alert">Credits Remaining: {userCredits}</p>
                    <p className="btn btn-outline-danger white-font">You will not be able to generate anymore reviews until you recharge your Credits</p>
                    
@@ -195,8 +222,8 @@ function GenerateReview(){
             <MutatingDots 
                  height="100"
                  width="100"
-                 color="#4fa94d"
-                 secondaryColor= '#4fa94d'
+                 color="#ff7f50"
+                 secondaryColor= '#adff2f'
                  radius='12.5'
                  ariaLabel="mutating-dots-loading"
                  wrapperStyle={{}}

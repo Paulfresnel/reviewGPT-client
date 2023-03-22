@@ -18,20 +18,57 @@
 
 .card{
     color: #003556;
+    border-radius: 5px 35px 5px 35px;
     width: 35rem;
+    background-color: #c2ff67;
+}
+
+.black-color{
+    color: #2B193D;
+}
+
+.danger-font{
+    color: #FF4242;
+     background-color: #B3FFFC;
+     border: 2px #FF4242 solid;
+}
+
+.div-block2{
+    margin: 0 auto;
+    width: 225px;
+    color: #B3FFFC;
+    border-bottom: 1px solid #B3FFFC;
+    margin-bottom: 35px;
+}
+
+
+
+.copy-btn{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.5rem;
+}
+
+.div-block{
+    border-top: 1px #9A58FD solid;
+    width: 200px;
+    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
 
 .gpt-response{
     font-style: italic;
+    background-color: #B3FFFC;
     border: 1px #9A58FD solid;
     border-radius: 5px 25px 5px 25px;
-    padding: 8px;
+    padding: 2px 10px 20px 10px;
     box-shadow: 8px 8px 5px 1px #3b1b6b;
 }
 
 .flex-wrap{
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 25px;
     justify-content: space-around;
 }
