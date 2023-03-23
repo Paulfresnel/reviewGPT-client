@@ -157,7 +157,7 @@ function GenerateReview(){
         </select></h3>
         {category === '' ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
         </div> 
-            <div>
+            <div className="margin-bottom">
             <div className="flex">
             <h4 className="btn btn-primary spaced">2</h4>
             <label>Place Name:<input onChange={(e)=>updatePlaceName(e)}></input></label>
@@ -218,7 +218,7 @@ function GenerateReview(){
                    
                    </div>}
 
-           {isLoading  && <div className="flex">
+           {isLoading  && <div className="flex margin-bottom">
             <MutatingDots 
                  height="100"
                  width="100"

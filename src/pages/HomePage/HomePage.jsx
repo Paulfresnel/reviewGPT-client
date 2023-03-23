@@ -19,16 +19,17 @@ function HomePage(){
               </div>
 </div>
 
-        <div>
+        <div className='centered-div'>
             <h2 className='ta-left margin-bottom-plus'>Leverage the power of <br/><span className='colored bold big-font'>Chat GPT</span></h2>
             <p className='margin-bottom-inter'>Access the openAI chatGPT API to quickly generate a variety of unique reviews based on
             short inputs. Save time and energy to build your perfect review!</p>
         </div>
 
 
-
+        <div className='centered-div'>
             <h2 className='ta-left margin-bottom-plus'>Capitalize on your Users</h2>
-            <p className='margin-bottom-inter'>Invite your users' to leave some key-words about their feeling and emotions with your business and Quickly generate a relevant full-sentence review </p>
+            <p className='margin-bottom-inter m-left-0 ta-left'>Invite your users' to leave some key-words about their feeling and emotions with your business and Quickly generate a relevant full-sentence review </p>
+        </div>
             <div className="flex-responsive">
                 <div>
                     <h2 className='ta-left margin-bottom-plus'>Boost your Users' Engagement</h2>
@@ -40,7 +41,7 @@ function HomePage(){
                         <li className='ta-left'>Obtain releveant feedback at key convertion steps</li>
                     </ul>
                 </div>
-                <img className='margin-bottom-inter menu-img' src='/images/reviewgpt-homepage.png'/>
+                <img className='margin-bottom-inter menu-img' src='/images/robot-ai.png'/>
             </div>
         </div>
     )

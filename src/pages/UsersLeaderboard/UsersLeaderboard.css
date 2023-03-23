@@ -1,0 +1,11 @@
+.margin-auto{
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.flex-centered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}

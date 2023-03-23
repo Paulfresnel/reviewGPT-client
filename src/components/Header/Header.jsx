@@ -37,6 +37,12 @@ function Header(){
                   </Link>
                 </li>}
 
+                {isLoggedIn && <li className="nav-item nav-link">
+                  <Link to={"/leaderboard"}>
+                    <p className="nav-link">User Leaderboard</p> 
+                  </Link>
+                </li>}
+
                 {!isLoggedIn && <li className="nav-item ">
                 
                   <p className="nav-link"><Link to={"/signup"}>Sign Up</Link> /  <Link to={"/login"}>Log In </Link></p>

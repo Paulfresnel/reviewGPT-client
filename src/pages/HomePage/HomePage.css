@@ -138,6 +138,15 @@
     border-radius: 15px;
 }
 
+.centered-div{
+    margin: 0 auto;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: left;
+}
+
 .flex-responsive {
     display: flex;
     justify-content: center;
@@ -150,6 +159,19 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+    .menu-img{
+        width: 250px;
+        border-radius: 15px;
+        margin-top: 15px;
+        box-shadow: 5px 5px 15px 2px coral;
+    }
+    .centered-div{
+        margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: left;
     }
 }
 
@@ -168,4 +190,8 @@
 
 .margin-bottom-inter{
     margin-bottom: 40px;
+}
+
+.m-left-0{
+    margin-left: 0;
 }

@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../context/auth.context"
 import './Profile.css'
 import ClipboardJS from "clipboard"
+import { MutatingDots } from "react-loader-spinner"
 
 const serverUrl = process.env.REACT_APP_SERVER_URL
 
@@ -10,6 +11,7 @@ function Profile(){
     
     const [userProfile, setUserProfile] = useState({})
     const {user} = useContext(AuthContext)
+    const [isLoading, setIsLoading] = useState(true)
 
     const copied = (e)=>{
         console.log(e.target)
@@ -27,11 +29,30 @@ function Profile(){
             .then(response=>{
                 let userInfo = response.data
                 setUserProfile(userInfo)
+                setTimeout(()=>{
+                    setIsLoading(false)
+                },1000)
+
             })
     }, [])
 
     return(
         <div>
+        {isLoading && <div className="flex-centered"><MutatingDots 
+                 height="100"
+                 width="100"
+                 color="#ff7f50"
+                 secondaryColor= '#adff2f'
+                 radius='12.5'
+                 ariaLabel="mutating-dots-loading"
+                 wrapperStyle={{}}
+                 wrapperClass=""
+                 visible={true}
+                />
+                </div>}
+
+
+            {!isLoading && <div>
             <div className="flex">
                 <h1>Welcome {userProfile.user}</h1> {userProfile.userStatus === 'premium' && <span class="badge bg-warning new-badge">Premium</span>}
             </div>
@@ -70,6 +91,7 @@ function Profile(){
             }) }
             </div>
         </div>
+        } </div>
     )
 }
 
