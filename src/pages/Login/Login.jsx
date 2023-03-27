@@ -24,7 +24,7 @@ function LoginPage() {
         .then(response => {
             storeToken(response.data.authToken);
             authenticateUser();
-            navigate('/profile');
+            navigate('/profile')
         })
         .catch(err => setErrorMessage(err.response.data.message));
   };
@@ -33,10 +33,10 @@ function LoginPage() {
     <div className="login-form">
       <h1>Welcome!</h1>
  
-      <form onSubmit={handleLoginSubmit}>
+      <form onSubmit={handleLoginSubmit} className="auth-form">
         <div className='form-floating mb-3'>
           <input 
-            className='form-control'
+            className='form-control auth-input'
             type="email"
             name="email"
             value={email}
@@ -48,7 +48,7 @@ function LoginPage() {
 
         <div className='form-floating mb-3'>
           <input
-            className='form-control'
+            className='form-control auth-input'
             type="password"
             name="password"
             value={password}

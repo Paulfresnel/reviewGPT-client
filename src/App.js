@@ -17,7 +17,7 @@ function App() {
     <Header/>
       <Routes>
       <Route path={"/"} element={<HomePage/>}/>
-      <Route path={'/login'} element={<LoginPage/>}/>
+      <Route path={'/login'} element={<IsAnon><LoginPage/></IsAnon>}/>
       <Route path={'/signup'} element={<IsAnon><SignupPage/></IsAnon>}/>
       <Route path={'/profile'} element={<IsPrivate><Profile/></IsPrivate>}/>
       <Route path={'/generate-review'} element={<IsPrivate><GenerateReview/></IsPrivate>}/>

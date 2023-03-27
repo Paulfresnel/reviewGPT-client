@@ -5,7 +5,7 @@
 }
 
 .navbar {
-    background-color: #00E0D9;
+    background-color: #F7F7FF;
     padding: 10px 15px 10px 15px
 }
 
@@ -13,13 +13,13 @@
     margin-left: 15px;
     color: #003566;
     font-weight: bold;
-    font-family: 'Aubange Belgium', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-shadow: 4px 4px #ffd60A;
-    font-size: 1.1rem;
+    font-size: 1.35rem;
 
 }
 
-.bi-mortarboard {
+.bi-robot {
     margin: 0 auto;
     width: 50px;
     text-shadow: 4px 4px #ffd60A;

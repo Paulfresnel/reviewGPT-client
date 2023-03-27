@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SignupPage.css"
- 
+import { AuthContext } from "../../context/auth.context"; 
 const API_ROUTE = process.env.REACT_APP_SERVER_URL;
  
  
@@ -11,6 +11,8 @@ function SignupPage() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const { storeToken, authenticateUser } = useContext(AuthContext);
+
  
   const navigate = useNavigate();
   
@@ -22,18 +24,23 @@ function SignupPage() {
     const newUser = {email, name: username, password};
 
     axios.post(`${API_ROUTE}/auth/signup`, newUser)
-      .then(() => navigate('/login'))
+      .then((response) =>{
+            storeToken(response.data.authToken);
+            authenticateUser();
+            navigate('/profile')
+      })
       .catch(err => setErrorMessage(err.response.data.message));
+
   };
  
   
   return (
     <div className="login-form">
         <h1>Welcome!</h1>
-        <form onSubmit={handleSignupSubmit}>
+        <form onSubmit={handleSignupSubmit} className="auth-form">
           <div className='form-floating mb-3'>
             <input 
-              className='form-control'
+              className='form-control auth-input'
               type="email"
               name="email"
               value={email}
@@ -44,9 +51,11 @@ function SignupPage() {
           </div>
 
 
+          
+
         <div className='form-floating mb-3'>
             <input 
-              className='form-control'
+              className='form-control auth-input'
               type="text"
               name="username"
               value={username}
@@ -58,7 +67,7 @@ function SignupPage() {
   
           <div className='form-floating mb-3'>
             <input 
-              className='form-control'
+              className='form-control auth-input'
               type="password"
               name="password"
               value={password}
@@ -76,7 +85,7 @@ function SignupPage() {
       
         <div className="signup-link">
           <p>Already have account?</p>
-          <Link to={"/log-in"}> Login</Link>
+          <Link to={"/login"}> Login</Link>
         </div>
     </div>
   )

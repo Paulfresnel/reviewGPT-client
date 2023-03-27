@@ -26,7 +26,7 @@ function UsersLeaderboard(){
     }, [])
 
     return(
-        <div>
+        <div className="margined">
         {isLoading ? <div className="flex-centered"><MutatingDots 
                  height="100"
                  width="100"
@@ -39,6 +39,8 @@ function UsersLeaderboard(){
                  visible={true}
                 /> </div> :
                  <div>
+                 <h1>Users' Leaderboard</h1>
+                 <div className="div-block2"/>
                     <table className="margin-auto">
                         <thead>
                             <tr>

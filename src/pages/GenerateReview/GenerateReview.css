@@ -3,7 +3,15 @@
 }
 
 .error{
+    margin: 0 auto;
     color: red;
+    text-shadow: 1px 1px 1px #F7F7FF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 75vw;
+    padding: 8px;
+    border: 2px red solid;
+    border-radius: 10px;
 }
 
 .border{
@@ -86,6 +94,7 @@
 
 i{
     margin-left: 15px;
+    margin-right: 15px;
     font-size: 1.5rem;
     color:seashell
 }
@@ -96,6 +105,10 @@ i{
 
 .short{
     width: 55px;
+}
+
+.margin-top{
+    margin-top: 20px;
 }
 
 .no-margin-top{
@@ -110,12 +123,18 @@ i{
 
 .generate-btn-valid {
     color: #adff2f !important;
-    border: 1px solid #adff2f;
+    border: 2px solid #adff2f;
+    margin-bottom: 15px;
+}
+
+.generate-btn-valid:hover{
+    border: 2px solid #adff2f;
 }
 
 .generate-btn-invalid{
-    color: #fcfcfc !important;
-    border: 1px solid #fcfcfc;
+    margin-bottom: 15px;
+    color: #F7F7FF !important;
+    border: 2px solid crimson;
 }
 
 .margin-bottom{

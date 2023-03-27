@@ -18,7 +18,7 @@ function Header(){
             </button>
             <div className="collapse navbar-collapse " id="navbarNav" style={{marginTop: '10px'}}>
               <ul className="navbar-nav">
-                <i class="bi bi-mortarboard"></i>
+                <i class="bi bi-robot"></i>
                 <li className="nav-item active nav-link">
                   <Link to={"/"}>
                     <p className="nav-link">Home</p> 

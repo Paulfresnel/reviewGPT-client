@@ -135,7 +135,9 @@ function GenerateReview(){
 
     return(
         <div className="flex-c margined">
-        <h1>Welcome back {user.name}</h1>
+        <h1 className="margin-top"> Hi <strong className="colored-highlighted">{user.name}</strong>, ready to quickly generate a review?</h1>
+        <p> Make sure all flags <i class="bi bi-bookmark"></i> are checked <i class="bi bi-bookmark-check-fill"></i> to generate your review </p>
+        <div className="div-block2"/>
         <div className="flex">
         <h4 className="btn btn-primary spaced">1</h4>
         <h3>Generate a Review for a <select onChange={(e)=>setCategory(e.target.value)}> 
@@ -201,7 +203,7 @@ function GenerateReview(){
             {language.length < 3 ? <i class="bi bi-bookmark"></i> : <i class="bi bi-bookmark-check-fill"></i>}
            </div>
            <p className="italic">Ex: French</p>
-           {(category !== '' && placeName.length >= 3 && language.length >= 3 && prompt.length >= 20)? <button className="btn btn-outline-primary generate-btn-valid" onClick={(e)=>generateReview(e)} >Generate Review!</button> : <button className="btn btn-outline-primary generate-btn-invalid" onClick={(e)=>generateReview(e)} >Generate Review!</button>}
+           {(category !== '' && placeName.length >= 3 && language.length >= 3 && prompt.length >= 20)? <button className="btn btn-outline-primary generate-btn-valid" onClick={(e)=>generateReview(e)} >Generate Review!</button> : <button className="btn btn-outline-primary generate-btn-invalid" onClick={(e)=>generateReview(e)} >Generate Review</button>}
            {errorMessage && <p className="error">{errorMessage}</p>}
            
           {!isLoading  && <div className="margin-0-auto">{gptResponse && <div className="border">
@@ -212,6 +214,7 @@ function GenerateReview(){
                 {totalTokens !== 0 && <p>This Generation costed you a total of <span className="bold"> {totalTokens}</span> credits from your total Tokens quota limit</p>}
            </div>}
            </div>}
+           <div className="div-block2"/>
                    {userCredits>0 ? <p>Credits Remaining: {userCredits}</p> : <div className="margin-bottom">
                    <p className="alert">Credits Remaining: {userCredits}</p>
                    <p className="btn btn-outline-danger white-font">You will not be able to generate anymore reviews until you recharge your Credits</p>

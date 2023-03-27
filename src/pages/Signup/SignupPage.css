@@ -1,0 +1,19 @@
+.auth-input{
+    width: 60vw;
+}
+
+.auth-input{
+    color: #131112;
+    background-color: #ae7df7;
+}
+
+.auth-input:focus{
+    background-color: rgb(253, 207, 191);
+}
+
+.auth-form{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

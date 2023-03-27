@@ -33,6 +33,10 @@
      border: 2px #FF4242 solid;
 }
 
+.danger-font:hover{
+    border: 2px #B3FFFC solid;
+}
+
 .div-block2{
     margin: 0 auto;
     width: 225px;
@@ -71,4 +75,19 @@
     flex-wrap: wrap;
     margin-bottom: 25px;
     justify-content: space-around;
+}
+
+.btn-generate{
+    background-color: #c2ff67;
+    border: #003556 2px solid;
+    color: #9A58FD;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 15px;
+}
+
+.btn-generate:hover{
+    background-color: #c2ff67;
+    color: #131112;
+    border: 2px #131112 solid;
 }

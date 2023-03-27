@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/auth.context"
 import './Profile.css'
 import ClipboardJS from "clipboard"
 import { MutatingDots } from "react-loader-spinner"
+import { Link } from "react-router-dom"
 
 const serverUrl = process.env.REACT_APP_SERVER_URL
 
@@ -54,14 +55,18 @@ function Profile(){
 
             {!isLoading && <div>
             <div className="flex">
-                <h1>Welcome {userProfile.user}</h1> {userProfile.userStatus === 'premium' && <span class="badge bg-warning new-badge">Premium</span>}
+                <h1>Welcome <strong className="colored-highlighted">{userProfile.user}</strong> </h1> {userProfile.userStatus === 'premium' && <span class="badge bg-warning new-badge"> Premium </span>}
             </div>
             <div className="div-block2"/>
             <p>Total Credits Left: {userProfile.credits}</p>
             {userProfile.credits < 0 && <p className="btn btn-outline-danger danger-font"> You will need to recharge your credits before being able to use our generation tool again</p>}
             
             <br/>
-            {userProfile.reviews && <h2>Reviews Generated</h2>}
+            {userProfile.reviews.length !== 0 ? <h2>Reviews Generated</h2> :  <div> <div className="div-block2"/><p>You have not yet generated any review!</p>
+            <Link to={'/generate-review'}>
+            <button className="btn btn-outline-success btn-generate">Generate a Review</button>
+            </Link>
+            </div>}
             <br/>
             <div className="flex-wrap">
             {userProfile.reviews && userProfile.reviews.map((review,index)=>{
